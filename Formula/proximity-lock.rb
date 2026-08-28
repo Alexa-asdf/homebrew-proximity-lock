@@ -3,10 +3,10 @@ class ProximityLock < Formula
 
   desc "Lock a Mac when its enrolled paired iPhone is away"
   homepage "https://github.com/Alexa-asdf/proximity-lock"
-  license "Apache-2.0"
   url "https://github.com/Alexa-asdf/proximity-lock/archive/refs/tags/v0.1.0.tar.gz"
   sha256 "cacfd59194fdbbee0b4fd2aab67502118070ab9cd9c19de5342ef9a06e0960a9"
   version "0.1.0"
+  license "Apache-2.0"
 
   depends_on :macos
   depends_on "python@3.14"
@@ -62,7 +62,7 @@ class ProximityLock < Formula
   end
 
   def install
-    python = Formula["python@3.14"].opt_bin/"python3.14"
+    python = formula_opt_bin("python@3.14")/"python3.14"
     venv = virtualenv_create(libexec/"proximity-lock/venv", python)
     venv.pip_install resources
     system "make", "install-runtime", "PREFIX=#{prefix}"
@@ -70,7 +70,9 @@ class ProximityLock < Formula
 
   test do
     assert_predicate libexec/"proximity-lock/bin/lockmac-private", :executable?
-    assert_match "PASS", shell_output("#{libexec}/proximity-lock/bin/proximity-lock-enrollment --enrollment-self-check")
+    assert_match "PASS", shell_output(
+      "#{libexec}/proximity-lock/bin/proximity-lock-enrollment --enrollment-self-check",
+    )
     assert_match "PASS", shell_output("#{libexec}/proximity-lock/bin/lockmac-private --identity-self-check")
   end
 end
