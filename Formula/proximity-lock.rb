@@ -4,7 +4,6 @@ class ProximityLock < Formula
   desc "Lock a Mac when its enrolled paired iPhone is away"
   homepage "https://github.com/Alexa-asdf/proximity-lock"
   url "https://github.com/Alexa-asdf/proximity-lock/archive/refs/tags/v0.1.0.tar.gz"
-  version "0.1.0"
   sha256 "cacfd59194fdbbee0b4fd2aab67502118070ab9cd9c19de5342ef9a06e0960a9"
   license "Apache-2.0"
 
